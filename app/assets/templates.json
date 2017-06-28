@@ -1,0 +1,43 @@
+{
+  "defaults": [
+    {
+      "name": "mobile",
+      "category": "default",
+      "images": [{ "x": 780, "y": 208, "width": 360, "height": 640 }],
+      "mockup": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080,
+        "path": "mockups/mockup-mobile.png"
+      }
+    },
+    {
+      "name": "desktop",
+      "category": "default",
+      "images": [{ "x": 350, "y": 130, "width": 1204, "height": 753 }],
+      "mockup": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080,
+        "path": "mockups/mockup-desktop.png"
+      }
+    },
+    {
+      "name": "side-by-side",
+      "category": "default",
+      "images": [
+        { "x": 273, "y": 137, "width": 1204, "height": 753 },
+        { "x": 1483, "y": 428, "width": 297, "height": 640 }
+      ],
+      "mockup": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080,
+        "path": "mockups/mockup-side-by-side.png"
+      }
+    }
+  ]
+}

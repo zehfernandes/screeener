@@ -1,0 +1,10 @@
+.img {
+  border-color: #999;
+  border-width:3px;
+  transition: border-color 200ms ease-out
+}
+
+.img, h3, p { cursor: pointer }
+.list:hover > .img {
+  border-color: #1880F9;
+}
