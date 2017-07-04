@@ -1,5 +1,5 @@
 const electron = require('electron')
-const { BrowserWindow, ipcMain } = require('electron')
+const { BrowserWindow, ipcMain, dialog } = require('electron')
 const app = electron.app
 
 const path = require('path')
@@ -46,8 +46,20 @@ app.on('ready', function() {
   })
 
   ipcMain.on('run-keynote', (event, templateData) => {
-    console.log("click")
-    jxaBridge(templateData)
+    console.log('click')
+    dialog.showOpenDialog(
+      mainWindow,
+      {
+        title: 'Select the folder or the image files',
+        properties: ['openFile', 'openDirectory', 'multiSelections'],
+        filters: [{ name: 'Images', extensions: ['jpg', 'png', 'gif'] }],
+      },
+      function(filesPath) {
+        if (filesPath !== undefined) {
+          jxaBridge(templateData, filesPath)
+        }
+      }
+    )
   })
 
   autoUpdater.init(mainWindow)
