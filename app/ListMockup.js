@@ -4,30 +4,45 @@ import { bind } from 'decko'
 
 const ListItem = ({ name, thumb, imgSizes, ...props }) => {
   return (
-  <li className="list db fl w-third pr3 pl3 pb3" {...props}>
-    <img src={thumb} className="img w-100 ba bw1" style="height:134px;" />
-    <h3 className="db tc ma1 fw4 f5 o-80 mt2" style="letter-spacing:0.05em">
-      {name}
-    </h3>
-    <p className="db tc ma0 pa0 o-40 f6 fw3" style="letter-spacing:0.05em">
-      {imgSizes}
-    </p>
-  </li>
-)}
+    <li className="list db fl w-third pr3 pl3 pb3" {...props}>
+      <img src={thumb} className="img w-100 ba bw1" style="height:134px;" />
+      <h3 className="db tc ma1 fw4 f5 o-80 mt2" style="letter-spacing:0.05em">
+        {name}
+      </h3>
+      <p className="db tc ma0 pa0 o-40 f6 fw3" style="letter-spacing:0.05em">
+        {imgSizes}
+      </p>
+    </li>
+  )
+}
+
+const AddMockup = ({ ...props }) => {
+  return (
+    <li className="list db fl w-third pr3 pl3 pb3" {...props}>
+      <div className="img w-60 ba bw1 tc pt1" style="height:140px;">
+        <span className="fw1 o-80" style="font-size:90px">+</span>
+      </div>
+      <div className="w-60">
+        <h3 className="db tc ma1 fw4 f5 o-80 mt2" style="letter-spacing:0.05em">
+          Add your mockup
+        </h3>
+      </div>
+    </li>
+  )
+}
 
 export default class ListMockup extends Component {
   constructor() {
     super()
   }
 
-  @bind
-  handleClick(mock) {
+  @bind handleClick(mock) {
     ipcRenderer.send('run-keynote', mock)
     console.log(mock)
   }
 
   extractImageSize(obj) {
-    let imgs = obj.map((img) => {
+    let imgs = obj.map(img => {
       return `${img.width}x${img.height}`
     })
 
@@ -42,19 +57,27 @@ export default class ListMockup extends Component {
     return (
       <div>
         {name
-        ? <h4
-          className="f6 ttu tracked-mega fw7 pl3 pb2 pt3"
-          style="color:#C5C5C5"
-        >
-          {name}
-        </h4>
-        : null }
+          ? <h4
+              className="f6 ttu tracked-mega fw7 pl3 pb2 pt3"
+              style="color:#C5C5C5"
+            >
+              {name}
+            </h4>
+          : null}
         <ul className="pa0 ma0 list w-100 cf">
           {items.map(template => {
             let imgSizes = this.extractImageSize(template.images)
             let name = this.humanizeName(template.name)
-            return <ListItem name={name} imgSizes={imgSizes} thumb={template.mockup.path} onClick={() => this.handleClick(template)} />
+            return (
+              <ListItem
+                name={name}
+                imgSizes={imgSizes}
+                thumb={template.mockup.path}
+                onClick={() => this.handleClick(template)}
+              />
+            )
           })}
+          {name !== 'Default Mockups' ? <AddMockup /> : null}
         </ul>
       </div>
     )

@@ -757,6 +757,33 @@ const ListItem = (_ref) => {
   );
 };
 
+const AddMockup = (_ref2) => {
+  let props = _objectWithoutProperties(_ref2, []);
+
+  return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+    'li',
+    _extends({ className: 'list db fl w-third pr3 pl3 pb3' }, props),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      'div',
+      { className: 'img w-60 ba bw1 tc pt1', style: 'height:140px;' },
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+        'span',
+        { className: 'fw1 o-80', style: 'font-size:90px' },
+        '+'
+      )
+    ),
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+      'div',
+      { className: 'w-60' },
+      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
+        'h3',
+        { className: 'db tc ma1 fw4 f5 o-80 mt2', style: 'letter-spacing:0.05em' },
+        'Add your mockup'
+      )
+    )
+  );
+};
+
 let ListMockup = (_class = class ListMockup extends __WEBPACK_IMPORTED_MODULE_0_preact__["Component"] {
   constructor() {
     super();
@@ -797,8 +824,14 @@ let ListMockup = (_class = class ListMockup extends __WEBPACK_IMPORTED_MODULE_0_
         items.map(template => {
           let imgSizes = this.extractImageSize(template.images);
           let name = this.humanizeName(template.name);
-          return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(ListItem, { name: name, imgSizes: imgSizes, thumb: template.mockup.path, onClick: () => this.handleClick(template) });
-        })
+          return __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(ListItem, {
+            name: name,
+            imgSizes: imgSizes,
+            thumb: template.mockup.path,
+            onClick: () => this.handleClick(template)
+          });
+        }),
+        name !== 'Default Mockups' ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(AddMockup, null) : null
       )
     );
   }

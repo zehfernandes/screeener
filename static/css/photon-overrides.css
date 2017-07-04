@@ -1,10 +1,13 @@
 .img {
   border-color: #999;
   border-width:3px;
-  transition: border-color 200ms ease-out
+  transition: border-color 200ms ease-out, color 200ms ease-out
 }
 
 .img, h3, p { cursor: pointer }
-.list:hover > .img {
+.list:hover > .img,
+.list:hover > span {
   border-color: #1880F9;
+  color: #1880F9;
 }
+
