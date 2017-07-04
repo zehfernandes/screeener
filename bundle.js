@@ -765,7 +765,7 @@ const AddMockup = (_ref2) => {
     _extends({ className: 'list db fl w-third pr3 pl3 pb3' }, props),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
       'div',
-      { className: 'img w-60 ba bw1 tc pt1', style: 'height:140px;' },
+      { className: 'img ba bw1 tc pt1', style: 'height:140px;' },
       __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
         'span',
         { className: 'fw1 o-80', style: 'font-size:90px' },
@@ -773,13 +773,9 @@ const AddMockup = (_ref2) => {
       )
     ),
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-      'div',
-      { className: 'w-60' },
-      __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(
-        'h3',
-        { className: 'db tc ma1 fw4 f5 o-80 mt2', style: 'letter-spacing:0.05em' },
-        'Add your mockup'
-      )
+      'h3',
+      { className: 'db tc ma1 fw4 f5 o-80 mt2', style: 'letter-spacing:0.05em' },
+      'Add your mockup'
     )
   );
 };
@@ -792,6 +788,10 @@ let ListMockup = (_class = class ListMockup extends __WEBPACK_IMPORTED_MODULE_0_
   handleClick(mock) {
     __WEBPACK_IMPORTED_MODULE_1_electron__["ipcRenderer"].send('run-keynote', mock);
     console.log(mock);
+  }
+
+  handleAddClick() {
+    __WEBPACK_IMPORTED_MODULE_1_electron__["ipcRenderer"].send('open-docs');
   }
 
   extractImageSize(obj) {
@@ -831,11 +831,11 @@ let ListMockup = (_class = class ListMockup extends __WEBPACK_IMPORTED_MODULE_0_
             onClick: () => this.handleClick(template)
           });
         }),
-        name !== 'Default Mockups' ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(AddMockup, null) : null
+        name !== 'Default Mockups' ? __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0_preact__["h"])(AddMockup, { onClick: this.handleAddClick }) : null
       )
     );
   }
-}, (_applyDecoratedDescriptor(_class.prototype, 'handleClick', [__WEBPACK_IMPORTED_MODULE_2_decko__["bind"]], Object.getOwnPropertyDescriptor(_class.prototype, 'handleClick'), _class.prototype)), _class);
+}, (_applyDecoratedDescriptor(_class.prototype, 'handleClick', [__WEBPACK_IMPORTED_MODULE_2_decko__["bind"]], Object.getOwnPropertyDescriptor(_class.prototype, 'handleClick'), _class.prototype), _applyDecoratedDescriptor(_class.prototype, 'handleAddClick', [__WEBPACK_IMPORTED_MODULE_2_decko__["bind"]], Object.getOwnPropertyDescriptor(_class.prototype, 'handleAddClick'), _class.prototype)), _class);
 
 
 /***/ }),

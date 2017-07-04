@@ -19,14 +19,12 @@ const ListItem = ({ name, thumb, imgSizes, ...props }) => {
 const AddMockup = ({ ...props }) => {
   return (
     <li className="list db fl w-third pr3 pl3 pb3" {...props}>
-      <div className="img w-60 ba bw1 tc pt1" style="height:140px;">
+      <div className="img ba bw1 tc pt1" style="height:140px;">
         <span className="fw1 o-80" style="font-size:90px">+</span>
       </div>
-      <div className="w-60">
-        <h3 className="db tc ma1 fw4 f5 o-80 mt2" style="letter-spacing:0.05em">
-          Add your mockup
-        </h3>
-      </div>
+      <h3 className="db tc ma1 fw4 f5 o-80 mt2" style="letter-spacing:0.05em">
+        Add your mockup
+      </h3>
     </li>
   )
 }
@@ -39,6 +37,10 @@ export default class ListMockup extends Component {
   @bind handleClick(mock) {
     ipcRenderer.send('run-keynote', mock)
     console.log(mock)
+  }
+
+  @bind handleAddClick() {
+    ipcRenderer.send('open-docs')
   }
 
   extractImageSize(obj) {
@@ -77,7 +79,9 @@ export default class ListMockup extends Component {
               />
             )
           })}
-          {name !== 'Default Mockups' ? <AddMockup /> : null}
+          {name !== 'Default Mockups'
+            ? <AddMockup onClick={this.handleAddClick} />
+            : null}
         </ul>
       </div>
     )

@@ -1,5 +1,5 @@
 const electron = require('electron')
-const { BrowserWindow, ipcMain, dialog } = require('electron')
+const { BrowserWindow, ipcMain, dialog, shell } = require('electron')
 const app = electron.app
 
 const path = require('path')
@@ -59,6 +59,12 @@ app.on('ready', function() {
           jxaBridge(templateData, filesPath)
         }
       }
+    )
+  })
+
+  ipcMain.on('open-docs', () => {
+    shell.openExternal(
+      'https://github.com/zehfernandes/screenstokeynote/blob/master/README.md'
     )
   })
 
