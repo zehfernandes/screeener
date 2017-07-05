@@ -1,5 +1,5 @@
 <div align="center" markdown="1">
-<img src="docs/logo.png" alt="Screeener! Screens to keynote magically" width="500">
+<img src="docs/logo.png" alt="Screeener! Screens to keynote magically" width="500"> <br/>
 Use this app to insert a bunch of images to a keynote file, using the mockup you choose. Perfect for kick-ass presentations.
 </div>
 
