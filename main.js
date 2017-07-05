@@ -5,7 +5,8 @@ const app = electron.app
 const path = require('path')
 const url = require('url')
 
-const autoUpdater = require('./lib/autoUpdate.js')
+// const autoUpdater = require('./lib/autoUpdate.js')
+const autoUpdater = require('./lib/notifyUpdate.js')
 const { userDataPath, getLoadTemplateObj } = require('./lib/getTemplates.js')
 const { jxaBridge } = require('./lib/jxaBridge.js')
 const { applicationMenu } = require('./lib/menu.js')
@@ -67,6 +68,10 @@ app.on('ready', function() {
     shell.openExternal(
       'https://github.com/zehfernandes/screeeener#how-to-add-a-mockup'
     )
+  })
+
+  ipcMain.on('install-update', event => {
+    shell.openExternal('https://github.com/zehfernandes/screeener/releases')
   })
 
   Menu.setApplicationMenu(applicationMenu)
