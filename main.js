@@ -1,5 +1,5 @@
 const electron = require('electron')
-const { BrowserWindow, ipcMain, dialog, shell } = require('electron')
+const { BrowserWindow, ipcMain, dialog, shell, Menu } = require('electron')
 const app = electron.app
 
 const path = require('path')
@@ -8,6 +8,7 @@ const url = require('url')
 const autoUpdater = require('./lib/autoUpdate.js')
 const { userDataPath, getLoadTemplateObj } = require('./lib/getTemplates.js')
 const { jxaBridge } = require('./lib/jxaBridge.js')
+const { applicationMenu } = require('./lib/menu.js')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -64,10 +65,11 @@ app.on('ready', function() {
 
   ipcMain.on('open-docs', () => {
     shell.openExternal(
-      'https://github.com/zehfernandes/screenstokeynote/blob/master/README.md'
+      'https://github.com/zehfernandes/screeeener#how-to-add-a-mockup'
     )
   })
 
+  Menu.setApplicationMenu(applicationMenu)
   autoUpdater.init(mainWindow)
 })
 
