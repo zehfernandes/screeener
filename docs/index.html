@@ -1,0 +1,122 @@
+
+<!doctype html>
+<html class="no-js" lang="" style="font-size: 18px">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<title>Screeener! | Insert images to keynote magically 💫</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://unpkg.com/tachyons@4.7.0/css/tachyons.min.css"/>
+  <style type="text/css">
+    html { background: #fff }
+
+    body {
+      background: linear-gradient(to bottom, rgba(54,54,54,1) 0%, rgba(54,54,54,1) 40%, rgba(70,70,70,1) 53%, rgba(255,255,255,1) 53%, rgba(255,255,255,1) 100%);
+    }
+
+    .link-hover {
+      cursor: pointer;
+      transition: color 200ms ease-out !important;
+    }
+    .link-hover:hover {
+      color: #FFC454;
+    }
+    .blue-link {
+      color:#0976F5;
+    }
+
+    .cta {
+      padding:0.8em 0.2em;
+      width: 100%;
+      background-color: #0976F5;
+      transition: background-color 200ms ease-out !important;
+    }
+
+    .cta:hover {
+      background-color: #FFC454;
+    }
+
+    @media screen and (min-width: 30em) {
+      .vcenter-ns { transform: translateY(-50%); top: 50%; }
+      .h80-ns { height: 80vh; max-width: none;  }
+      .cta { padding:0.8em 1.1em; width: auto; }
+    }
+
+  </style>
+</head>
+<body style="font-family: 'Helvetica Neue', Helvetica">
+	<main class="center w-90 w-80-ns">
+    <header class="dn db-ns pt2 pb5 cf">
+      <ul class="list ma0 pa0 pt3 fr light-gray">
+        <li class="f6 fw7 pr4 dib"><a class="white link link-hover" href="https://github.com/zehfernandes/screeener#how-to-add-a-mockup" target="_blank">How to use</a></li>
+        <li class="f6 fw7 dib"><a class="white link link-hover" href="https://github.com/zehfernandes/screeener" target="_blank">Contribute on Github</a></li>
+      </ul>
+    </header>
+
+    <section class="cf relative">
+      <div class="w-100 w-50-ns w-30-m fl-ns pa3 relative h80-ns">
+        <img src="screen.png" class="absolute-ns h80-ns" style="right:0;" />
+      </div>
+
+      <div class="w-100 w-50-ns w-70-m fl-ns pa2 pa3-ns relative h80-ns" style="color:#EAEAEA">
+        <div class="tc tl-ns absolute-ns vcenter-ns">
+          <h1 class="f1 f-subheadline-ns lh-title tracked-tight fw7 ma0 pa0" style="line-height: 0%"><img src="logo.svg" alt="Screeener!"></h1>
+          <!-- <h1 class="f1 f-subheadline-ns lh-title tracked-tight fw7 ma0 pa0" style="line-height: 100%">Screeener!</h1> -->
+          <h2 class="f3 f3-m f2-ns lh-copy fw1 ma0 pa0 mb2 mt1" style="line-height: 100%">Screens to keynote magically 💫</h2>
+          <p class="f5 lh-copy fw3 ma0 pa0 o-60" style="line-height: 150%">Use this app to insert a bunch of images to a keynote file, using the mockup you choose. Perfect for kick-ass presentations.</p>
+
+          <a id="download-button" href="https://github.com/zehfernandes/screeener/releases" class="cta dib f3 link white br3 mt3">
+            Download app
+            <span id="tag-version" class="db f6 o-60">v1.0.1  •  macOS 10.11 or above</span>
+          </a>
+
+          <ul class="list ma0 pa0 cf mt4 mid-gray">
+            <li class="w-50 fl w-25-ns pa2 tc f5 fw3">
+              <img src="slide-item.svg" class="db center w-60 mb3" />
+              Slide for<br/>each fold
+            </li>
+            <li class="w-50 fl w-25-ns pa2 tc f5 fw3">
+              <img src="custom-item.svg" class="db center w-60 mb3" />
+              Custom<br/>Mockups
+            </li>
+            <li class="w-50 fl w-25-ns pa2 tc f5 fw3">
+              <img src="resize-item.svg" class="db center w-60 mb3" />
+              Aspect ratio<br/>preserve
+            </li>
+            <li class="w-50 fl w-25-ns pa2 tc f5 fw3">
+              <img src="retina-item.svg" class="db center w-60 mb3" />
+              Retina<br/>Support
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <footer class="tc tl-ns f6 cf pt3 pt5-ns mid-gray">
+      <p class="fl-ns">made with ❤ javascript (/dʒɑːvəˌskrɪpt/)</p>
+      <p class="fr-ns">automate all the things • <a href="http://zehfernandes.com/" target="_blank" class="link link-hover blue-link">@zehfernandes</a></p>
+    </footer>
+
+    <script type="text/javascript">
+      const getLatestRelease = () =>
+        fetch('https://api.github.com/repos/zehfernandes/screeener/releases/latest')
+          .then(res => res.json())
+          .then(json => {
+            const asset = json.assets;
+            return { "url": asset[0].browser_download_url, "tag": json.tag_name};
+          });
+
+      const updateButtonUrl = () => {
+        getLatestRelease().then(( { url, tag } ) => {
+          document.getElementById('download-button').href = url;
+          document.getElementById('tag-version').textContent = tag+'  •  macOS 10.11 or above';
+        });
+      }
+
+      updateButtonUrl();
+    </script>
+
+	</main>
+</body>
+</html>
