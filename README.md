@@ -4,7 +4,8 @@
 
 ## Get Screeener!
 
-**[Download the latest release](https://github.com/zehfernandes/screeener/releases)** (macOS only)
+- **[Download the latest release](https://github.com/zehfernandes/screeener/releases)** (macOS only)
+- **[See in action](https://youtu.be/1-MCLfDWXF8)** (video)
 
 Use this app to insert a bunch of images to a keynote file, using the mockup you choose.
 

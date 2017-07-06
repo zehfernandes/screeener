@@ -37,6 +37,32 @@
       background-color: #FFC454;
     }
 
+    .img-hover:after {
+      opacity: 0;
+      box-sizing: border-box;
+      display: block;
+      content: "watch the video ›";
+      font-size: 1em;
+      font-weight: 300;
+      padding-top: 40vh;
+      padding-right: 4em;
+      letter-spacing: 0.08em;
+      text-align: right;
+      color: #fff;
+      position: absolute;
+      right: 0.9%;
+      top: 1.7%;
+      width: 100%;
+      height: 96%;
+      background: rgba(0,0,0,0.7);
+      transition: opacity 200ms ease-in;
+      cursor: pointer;
+    }
+
+    .img-hover:hover:after {
+      opacity: 1;
+    }
+
     @media screen and (min-width: 30em) {
       .vcenter-ns { transform: translateY(-50%); top: 50%; }
       .h80-ns { height: 80vh; max-width: none;  }
@@ -56,14 +82,15 @@
 
     <section class="cf relative">
       <div class="w-100 w-50-ns w-30-m fl-ns pa3 relative h80-ns">
-        <img src="screen.png" class="absolute-ns h80-ns" style="right:0;" />
+        <img src="screen.png" class="db absolute-ns h80-ns" style="right:0;" />
+        <a href="https://youtu.be/1-MCLfDWXF8" target="_blank" class="db img-hover absolute-ns h80-ns" style="right:0; width: 1300px"></a>
       </div>
 
       <div class="w-100 w-50-ns w-70-m fl-ns pa2 pa3-ns relative h80-ns" style="color:#EAEAEA">
         <div class="tc tl-ns absolute-ns vcenter-ns">
           <h1 class="f1 f-subheadline-ns lh-title tracked-tight fw7 ma0 pa0" style="line-height: 0%"><img src="logo.svg" alt="Screeener!"></h1>
           <!-- <h1 class="f1 f-subheadline-ns lh-title tracked-tight fw7 ma0 pa0" style="line-height: 100%">Screeener!</h1> -->
-          <h2 class="f3 f3-m f2-ns lh-copy fw1 ma0 pa0 mb2 mt1" style="line-height: 100%">Screens to keynote <br/ class="db dn-ns">magically 💫</h2>
+          <h2 class="f3 f3-m f2-ns lh-copy fw1 ma0 pa0 mb2 mt2" style="line-height: 100%">Screens to keynote <br/ class="db dn-ns">magically 💫</h2>
           <p class="f5 lh-copy fw3 ma0 pa0 o-60" style="line-height: 150%">Use this app to insert a bunch of images to a keynote file, using the mockup you choose. Perfect for kick-ass presentations.</p>
 
           <a id="download-button" href="https://github.com/zehfernandes/screeener/releases" class="cta dib f3 link white br3 mt3">
