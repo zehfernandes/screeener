@@ -1,22 +1,21 @@
 <div align="center" markdown="1">
-<img src="docs/logo.png" alt="Screeener! Screens to keynote magically" width="500"><br/>
-Use this app to insert a bunch of images to a keynote file, using the mockup you choose.<br/>
+<img src="docs/logo.png" alt="Screeener! Screens to keynote magically" width="500">
 </div>
 
 ## Get Screeener!
 
-**[Download the latest release]()** (macOS only)
+**[Download the latest release](https://github.com/zehfernandes/screeener/releases)** (macOS only)
+Use this app to insert a bunch of images to a keynote file, using the mockup you choose.
 
-**Features**
-- Move the image to show the entire screen along slides
-- Support multiple images in the same slide
-- Support custom mockups
-- Resize images respecting the aspect ratio
-- Support retina images
-## How to add a mockup
+## How to install a new mockup
 
 1. Go to the folder `~/Library/Application Support/Screeener/templates`
-2. Add a new json file with the template below using your mockup informations:
+2. Add the JSON file and the mockup image in the folder
+3. Restart the app. And Done! 😎
+
+## How to create a mockup
+
+1. Write a JSON file with the template below using your mockup informations:
 ```json
 {
   "name": "Side by side",
@@ -34,8 +33,10 @@ Use this app to insert a bunch of images to a keynote file, using the mockup you
   }
 }
 ```
-3. Add the mockup image to the folder `/mockups` and inform the file path in the JSON.
-4. Restart the app. Done! 😎
+2. Go to the folder `~/Library/Application Support/Screeener/templates`
+3. Add your mockup JSON file in the folder
+4. Don't forget to paste the mockup image too, with the correct file path in JSON `path` node.
+5. Restart the app. And Done! 😎
 
 ## Contribute
 
