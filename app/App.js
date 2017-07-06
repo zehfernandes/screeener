@@ -44,10 +44,7 @@ export default class App extends Component {
       }
         <div className="w-90 center">
           <ListMockup name="Default Mockups" items={defaults} />
-
-          {loaded.length > 0
-            ? <ListMockup name="Your Mockups" items={loaded} />
-            : null}
+          <ListMockup name="Your Mockups" items={loaded} />
         </div>
       </div>
     )
