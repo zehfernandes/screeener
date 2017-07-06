@@ -66,7 +66,7 @@ app.on('ready', function() {
 
   ipcMain.on('open-docs', () => {
     shell.openExternal(
-      'https://github.com/zehfernandes/screeeener#how-to-add-a-mockup'
+      'https://github.com/zehfernandes/screeener#how-to-create-a-mockup'
     )
   })
 
