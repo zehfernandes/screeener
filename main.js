@@ -4,19 +4,20 @@ const app = electron.app
 
 const path = require('path')
 const url = require('url')
+const decache = require('decache');
 
 // const autoUpdater = require('./lib/autoUpdate.js')
 const autoUpdater = require('./lib/notifyUpdate.js')
 const { userDataPath, getLoadTemplateObj } = require('./lib/getTemplates.js')
 const { jxaBridge } = require('./lib/jxaBridge.js')
 const { applicationMenu } = require('./lib/menu.js')
+const { saveMockup, renderPNG, cleanTempFiles, copyMockupFile } = require('./lib/mockupData.js')
 
 // Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-// do this so that the window object doesn't get GC'd
 let mainWindow
+let addWindow
 
-app.on('ready', function() {
+app.on('ready', function () {
   // Pass those values in to the BrowserWindow options
   mainWindow = new BrowserWindow({
     width: 950,
@@ -28,7 +29,7 @@ app.on('ready', function() {
   })
 
   mainWindow.loadURL('file://' + path.join(__dirname, 'index.html'))
-  // mainWindow.openDevTools()
+  mainWindow.openDevTools()
 
   // Get the default mockups
   const templatesPath = path.join(__dirname, '/app/assets/templates.json')
@@ -41,9 +42,10 @@ app.on('ready', function() {
 
   const templates = Object.assign(defaultTemplates, loadTemplates)
 
-  // Get files from application support
+  /*
+    Keynotes
+  */
   ipcMain.on('load-templates', event => {
-    console.log(templates)
     event.sender.send('template-list', templates)
   })
 
@@ -56,7 +58,7 @@ app.on('ready', function() {
         properties: ['openFile', 'openDirectory', 'multiSelections'],
         filters: [{ name: 'Images', extensions: ['jpg', 'png', 'gif'] }],
       },
-      function(filesPath) {
+      function (filesPath) {
         if (filesPath !== undefined) {
           jxaBridge(templateData, filesPath)
         }
@@ -64,6 +66,43 @@ app.on('ready', function() {
     )
   })
 
+  /*
+    Save Mockups
+  */
+  ipcMain.on('add-mockup', (event, data) => {
+    dialog.showOpenDialog(
+      mainWindow,
+      {
+        title: 'Select your mockup image',
+        properties: ['openFile'],
+        filters: [{ name: 'Images', extensions: ['png'] }],
+      },
+      function (filesPath) {
+        if (filesPath !== undefined) {
+          let newFilePath = copyMockupFile(filesPath[0])
+          renderPNG(newFilePath).then(() => {
+            event.sender.send('change-page')
+          })
+        }
+      }
+    )
+  })
+
+  ipcMain.on('load-mockup', (event, data) => {
+    console.log(data)
+    const tempPath = path.join(`${userDataPath}/templates/`, data)
+    decache(tempPath)
+    const tempData = require(tempPath)
+    event.sender.send('result-mockup', tempData)
+  })
+
+  ipcMain.on('save-mockup', (event, data) => { })
+  ipcMain.on('clear-mockup', (event, data) => { })
+
+
+  /*
+    Others
+  */
   ipcMain.on('open-docs', () => {
     shell.openExternal(
       'https://github.com/zehfernandes/screeener#how-to-create-a-mockup'
@@ -76,18 +115,16 @@ app.on('ready', function() {
 
   Menu.setApplicationMenu(applicationMenu)
   autoUpdater.init(mainWindow)
+
+
+  mainWindow.on('window-all-closed', function () {
+    cleanTempFiles()
+  })
 })
+
+
 
 /*
-// Quit when all windows are closed.
-mb.window.on('window-all-closed', function () {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
-
 app.on('activate', function () {
   // On OS X it's common to re-create a window in the app when the
   // dock icon is clicked and there are no other windows open.

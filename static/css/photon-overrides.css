@@ -11,3 +11,23 @@
   color: #1880F9;
 }
 
+.home, add {
+  position: absolute;
+  top: 0
+}
+
+.transitionOutAdd {
+  transform: translateX(100%);
+  transition: transform 700ms ease;
+}
+
+.transitionOutHome {
+  transform: translateX(-100%);
+  transition: transform 700ms ease;
+}
+
+.transitionIn {
+  transform: translateX(0);
+  transition: transform 600ms 500ms ease;
+}
+

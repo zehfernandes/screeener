@@ -67,13 +67,20 @@
     "jshint": "^2.9.5"
   },
   "dependencies": {
+    "decache": "^4.1.0",
     "decko": "^1.2.0",
     "electron-fetch": "^1.0.0",
     "electron-is-dev": "^0.1.2",
+    "gm": "^1.23.0",
+    "jimp": "^0.2.28",
+    "lodash": "^4.17.4",
     "ms": "^2.0.0",
+    "pngjs": "^3.3.0",
+    "pngjs2": "^2.0.0",
     "postcss-loader": "^2.0.6",
     "preact": "^7.2.0",
     "preact-compat": "^3.13.1",
+    "preact-router": "^2.5.7",
     "tachyons": "^4.7.4",
     "webpack": "^2.2.1"
   }

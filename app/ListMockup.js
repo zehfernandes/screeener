@@ -40,7 +40,10 @@ export default class ListMockup extends Component {
   }
 
   @bind handleAddClick() {
-    ipcRenderer.send('open-docs')
+    ipcRenderer.send('add-mockup')
+    ipcRenderer.on('change-page', (store, data) => {
+      this.props.changePage('add')
+    })
   }
 
   extractImageSize(obj) {
@@ -55,16 +58,16 @@ export default class ListMockup extends Component {
     return name.charAt(0).toUpperCase() + name.replace(/-/g, ' ').slice(1)
   }
 
-  render({ name, items }) {
+  render({ name, items, addClick }) {
     return (
       <div>
         {name
           ? <h4
-              className="f6 ttu tracked-mega fw7 pl3 pb2 pt3"
-              style="color:#C5C5C5"
-            >
-              {name}
-            </h4>
+            className="f6 ttu tracked-mega fw7 pl3 pb2 pt3"
+            style="color:#C5C5C5"
+          >
+            {name}
+          </h4>
           : null}
         <ul className="pa0 ma0 list w-100 cf">
           {items.map(template => {

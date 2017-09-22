@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Add new mockup</title>
+  <link rel="stylesheet" href="./node_modules/tachyons/css/tachyons.min.css">
+  <link rel="stylesheet" href="./static/css/photon-overrides.css">
+</head>
+
+<body class="white" style="background:#212121; font: caption; overflow:hidden">
+  <div className="w-90 center">
+    <section>
+      <div class="cf ph2 pt3">
+        <div class="fl w-100 pa2">
+          <label for="password" class="f6 b db mb2">Mockup Image</label>
+          <input class="input-reset ba b--black-20 pa2 mb2 db w-100" type="file" id="mockup">
+        </div>
+      </div>
+
+      <div class="cf ph2">
+        <div class="fl w-50 pa2">
+          <label for="password" class="f6 b db mb2">X</label>
+          <input class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" id="posX">
+        </div>
+        <div class="fl w-50 pa2">
+          <label for="password" class="f6 b db mb2">Y</label>
+          <input class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" id="posY">
+        </div>
+      </div>
+
+      <div class="cf ph2">
+        <div class="fl w-50 pa2">
+          <label for="password" class="f6 b db mb2">Width</label>
+          <input class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" id="width">
+        </div>
+        <div class="fl w-50 pa2">
+          <label for="password" class="f6 b db mb2">Height</label>
+          <input class="input-reset ba b--black-20 pa2 mb2 db w-100" type="number" id="height">
+        </div>
+      </div>
+
+      <div class="cf ph2">
+        <div class="fl w-100 pa2">
+          <a class="f5 link dim br2 ph3 pv3 mb2 db white bg-black w-100 tc mt2" style="background: #1880F9" href="#0" id="sendData">Add new mockup</a>
+        </div>
+      </div>
+
+    </section>
+  </div>
+</body>
+<script>
+  (function () {
+    let button = document.getElementById('sendData')
+    let image = document.getElementById('mockup')
+    let positionX = document.getElementById('posX')
+    let positionY = document.getElementById('posY')
+    let width = document.getElementById('width')
+    let height = document.getElementById('height')
+
+    const ipcRenderer = require('electron').ipcRenderer
+
+    button.addEventListener('click', function () {
+      let invalid = checkForm()
+
+      if (invalid) {
+        console.log("Show error")
+        return
+      }
+
+      let data = {
+        x: positionX.value,
+        y: positionY.value,
+        width: width.value,
+        height: height.value,
+        image: image.value
+      }
+
+      ipcRenderer.send('add-mockup', data)
+    })
+
+    function checkForm() {
+      return false
+    }
+
+  })();
+
+</script>
+
+</html>

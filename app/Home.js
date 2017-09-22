@@ -4,7 +4,7 @@ import { bind } from 'decko'
 import ListMockup from './ListMockup'
 
 export default class App extends Component {
-  state = { defaults: [], loaded: [], notify: false }
+  state = { defaults: [], loaded: [], notify: false, transitionOut: false }
 
   loadItems() {
     ipcRenderer.send('load-templates')
@@ -32,19 +32,19 @@ export default class App extends Component {
     this.loadItems()
   }
 
-  render({}, { defaults, loaded, notify }) {
+  render({ }, { defaults, loaded, notify, transitionOut }) {
     return (
-      <div>
-      {notify
-        ? <div className="w-100 pv2 ph4 tc black white pointer" onClick={this.handleInstall} style="background:#1880F9">
-          <span className="pr1">🎉</span> New version is available
+      <div className={transitionOut ? 'transitionOut' : null}>
+        {notify
+          ? <div className="w-100 pv2 ph4 tc black white pointer" onClick={this.handleInstall} style="background:#1880F9">
+            <span className="pr1">🎉</span> New version is available
           <a href="#" className="pl1 white link">click here to install it</a>
-        </div>
-        : null
-      }
+          </div>
+          : null
+        }
         <div className="w-90 center">
           <ListMockup name="Default Mockups" items={defaults} />
-          <ListMockup name="Your Mockups" items={loaded} />
+          <ListMockup name="Your Mockups" items={loaded} {...this.props} />
         </div>
       </div>
     )
