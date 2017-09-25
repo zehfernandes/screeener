@@ -11,7 +11,7 @@ const autoUpdater = require('./lib/notifyUpdate.js')
 const { userDataPath, getLoadTemplateObj } = require('./lib/getTemplates.js')
 const { jxaBridge } = require('./lib/jxaBridge.js')
 const { applicationMenu } = require('./lib/menu.js')
-const { saveMockup, renderPNG, cleanTempFiles, copyMockupFile } = require('./lib/mockupData.js')
+const { saveMockup, renderPNG, cleanTempFiles, copyMockupFile, deleteTempJson } = require('./lib/mockupData.js')
 
 // Keep a global reference of the window object, if you don't, the window will
 let mainWindow
@@ -38,15 +38,16 @@ app.on('ready', function () {
     obj.mockup.path = `${__dirname}/app/assets/${obj.mockup.path}`
     return obj
   })
-  const loadTemplates = getLoadTemplateObj()
-
-  const templates = Object.assign(defaultTemplates, loadTemplates)
 
   /*
     Keynotes
   */
   ipcMain.on('load-templates', event => {
-    event.sender.send('template-list', templates)
+    console.log("Load Templates")
+    getLoadTemplateObj().then((loadTemplates) => {
+      const templates = Object.assign(defaultTemplates, loadTemplates)
+      event.sender.send('template-list', templates)
+    })
   })
 
   ipcMain.on('run-keynote', (event, templateData) => {
@@ -96,7 +97,12 @@ app.on('ready', function () {
     event.sender.send('result-mockup', tempData)
   })
 
-  ipcMain.on('save-mockup', (event, data) => { })
+  ipcMain.on('save-mockup', (event, data) => {
+    let fileName = data.name
+    saveMockup(fileName, data)
+    deleteTempJson()
+  })
+
   ipcMain.on('clear-mockup', (event, data) => { })
 
 
