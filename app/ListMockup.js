@@ -82,10 +82,10 @@ export default class ListMockup extends Component {
           </h4>
           : null}
 
-        {name !== 'Default Mockups' ?
+        {name !== 'Default Mockups' && items.length > 0 ?
           <a onClick={this.handleEditMode} className="f5 link absolute right-0 pr3 dim pointer" style="color: #A7A7A7; top:15.5px;">
-            {this.state.edit ? 'cancel editing' : 'edit mode'  }
-            </a>
+            {this.state.edit ? 'cancel editing' : 'edit mode'}
+          </a>
           : null}
 
         <ul className="pa0 ma0 list w-100 cf relative">
