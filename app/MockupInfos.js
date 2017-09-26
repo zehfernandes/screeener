@@ -25,14 +25,22 @@ const ImageItem = ({ name, thumb, width, height, x, y, index, onChange, ...props
 }
 
 export default class App extends Component {
-  state = {
-    name: '',
-    mockup: { image: '', width: '', height: '', x: '', y: '', name: '' },
-    images: []
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      name: '',
+      mockup: { image: '', width: '', height: '', x: '', y: '', name: '' },
+      images: []
+    }
   }
 
   @bind
-  handleBacktoHome() {
+  handleRemoveItem() {
+    const { editData } = this.props
+    const jsonFile = editData ? editData.fileName : '_temp.json'
+  
+    ipcRenderer.send('clear-mockup', jsonFile)
     this.props.changePage('home')
   }
 
@@ -72,15 +80,24 @@ export default class App extends Component {
   }
 
   componentWillMount() {
-    this.loadItems()
+    const { editData } = this.props
+    if (editData) {
+      this.setState(editData)
+      console.log(editData)
+    } else {
+      this.loadItems()
+    }
   }
 
   render({ }, { mockup, images, name }) {
-    console.log(mockup)
     return (
       <div className="w-100">
         <div className="w-90 center cf">
-          <section className="cf">
+          <section className="cf relative">
+            <div className="absolute right-0 pt3" style="margin-top: 1.33em; top:2px">
+              <a onClick={this.handleRemoveItem} className="dib f5 link pr3 dim pointer" style="color: #A7A7A7;">remove</a>
+            </div>
+            
             <h4 className="f6 ttu tracked-mega fw7 pl3 pb2 pt3" style="color:#C5C5C5" onClick={this.handleBacktoHome}>Mockup</h4>
             <div class="fl w-60 pl3 pr3">
               <img src={mockup.path} className="img w-100 ba bw1" />

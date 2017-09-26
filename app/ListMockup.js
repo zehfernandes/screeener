@@ -2,7 +2,7 @@ import { h, Component } from 'preact'
 import { ipcRenderer } from 'electron'
 import { bind } from 'decko'
 
-const ListItem = ({ name, thumb, imgSizes, ...props }) => {
+const ListItem = ({ name, thumb, imgSizes, edit, ...props }) => {
   return (
     <li className="list db fl w-third pr3 pl3 pb3" {...props}>
       <img src={thumb} className="img w-100 ba bw1" style="height:134px;" />
@@ -10,7 +10,7 @@ const ListItem = ({ name, thumb, imgSizes, ...props }) => {
         {name}
       </h3>
       <p className="db tc ma0 pa0 o-40 f6 fw3" style="letter-spacing:0.05em">
-        {imgSizes}
+        {edit ? "Edit mockup" : imgSizes}
       </p>
     </li>
   )
@@ -32,11 +32,23 @@ const AddMockup = ({ ...props }) => {
 export default class ListMockup extends Component {
   constructor() {
     super()
+
+    this.state = {
+      editMode: false
+    }
   }
 
   @bind handleClick(mock) {
-    ipcRenderer.send('run-keynote', mock)
-    console.log(mock)
+    if (!this.state.edit) {
+      ipcRenderer.send('run-keynote', mock)
+      console.log(mock)
+    } else {
+      this.props.changePage('add', mock)
+    }
+  }
+
+  @bind handleEditMode() {
+    this.setState({ edit: this.state.edit ? false : true })
   }
 
   @bind handleAddClick() {
@@ -60,16 +72,23 @@ export default class ListMockup extends Component {
 
   render({ name, items, addClick }) {
     return (
-      <div>
+      <div className="relative">
         {name
           ? <h4
-            className="f6 ttu tracked-mega fw7 pl3 pb2 pt3"
+            className="f6 ttu tracked-mega fw7 pl3 pb3 pt3"
             style="color:#C5C5C5"
           >
             {name}
           </h4>
           : null}
-        <ul className="pa0 ma0 list w-100 cf">
+
+        {name !== 'Default Mockups' ?
+          <a onClick={this.handleEditMode} className="f5 link absolute right-0 pr3 dim pointer" style="color: #A7A7A7; top:15.5px;">
+            {this.state.edit ? 'cancel editing' : 'edit mode'  }
+            </a>
+          : null}
+
+        <ul className="pa0 ma0 list w-100 cf relative">
           {items.map(template => {
             let imgSizes = this.extractImageSize(template.images)
             let name = this.humanizeName(template.name)
@@ -79,6 +98,7 @@ export default class ListMockup extends Component {
                 imgSizes={imgSizes}
                 thumb={template.mockup.path}
                 onClick={() => this.handleClick(template)}
+                edit={this.state.edit}
               />
             )
           })}

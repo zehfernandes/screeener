@@ -3,13 +3,14 @@ import Home from './Home.js';
 import MockupInfo from './MockupInfos.js';
 
 export default class App extends Component {
-  state = { page: 'home', mount: 'home', animate: false }
+  state = { page: 'home', mount: 'home', animate: false, editData: null }
 
-  changePage = (page) => {
+  changePage = (page, data) => {
     console.log("Transition Out")
     this.setState({
       page: page,
-      animate: true
+      animate: true,
+      editData: data ? data : null
     })
     setTimeout(() => {
       this.setState({
@@ -32,7 +33,7 @@ export default class App extends Component {
 
         <div className={`add ${page === 'add' ? 'transitionIn' : 'transitionOutAdd'}`}>
           {mount === 'add' || animate === true ?
-            <MockupInfo changePage={this.changePage} />
+            <MockupInfo changePage={this.changePage} editData={this.state.editData} />
             : null}
         </div>
       </div>

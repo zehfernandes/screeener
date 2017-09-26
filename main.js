@@ -21,7 +21,7 @@ app.on('ready', function () {
   // Pass those values in to the BrowserWindow options
   mainWindow = new BrowserWindow({
     width: 950,
-    height: 600,
+    height: 610,
     resizable: false,
     title: 'Select your theme',
     icon: path.join(__dirname, '/app/assets/ic.png.icns'),
@@ -29,7 +29,7 @@ app.on('ready', function () {
   })
 
   mainWindow.loadURL('file://' + path.join(__dirname, 'index.html'))
-  mainWindow.openDevTools()
+  //mainWindow.openDevTools()
 
   // Get the default mockups
   const templatesPath = path.join(__dirname, '/app/assets/templates.json')
@@ -80,9 +80,8 @@ app.on('ready', function () {
       },
       function (filesPath) {
         if (filesPath !== undefined) {
-          let newFilePath = copyMockupFile(filesPath[0])
-          renderPNG(newFilePath).then(() => {
-            event.sender.send('change-page')
+          copyMockupFile(filesPath[0]).then((newFilePath) => {
+            renderPNG(newFilePath).then(() => event.sender.send('change-page'))
           })
         }
       }
@@ -90,7 +89,6 @@ app.on('ready', function () {
   })
 
   ipcMain.on('load-mockup', (event, data) => {
-    console.log(data)
     const tempPath = path.join(`${userDataPath}/templates/`, data)
     decache(tempPath)
     const tempData = require(tempPath)
@@ -103,7 +101,9 @@ app.on('ready', function () {
     deleteTempJson()
   })
 
-  ipcMain.on('clear-mockup', (event, data) => { })
+  ipcMain.on('clear-mockup', (event, data) => {
+    cleanTempFiles(data)
+  })
 
 
   /*
@@ -124,7 +124,7 @@ app.on('ready', function () {
 
 
   mainWindow.on('window-all-closed', function () {
-    cleanTempFiles()
+    cleanTempFiles('_temp.json')
   })
 })
 
