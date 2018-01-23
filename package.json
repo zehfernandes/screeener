@@ -1,7 +1,7 @@
 {
   "name": "screeener",
   "productName": "Screeener",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -10,20 +10,32 @@
     "pack": "webpack && build --dir",
     "dist": "webpack && build",
     "postinstall": "electron-builder install-app-deps",
-    "package-mac":
-      "webpack && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=app/assets/icon.icns --prune=true --out=release-builds"
+    "package-mac": "webpack && electron-packager . --overwrite --platform=darwin --arch=x64 --icon=app/assets/icon.icns --prune=true --out=release-builds"
   },
   "repository": "https://github.com/zehfernandes/screeener",
-  "keywords": ["Keynote", "jxa", "mockups"],
+  "keywords": [
+    "Keynote",
+    "jxa",
+    "mockups"
+  ],
   "author": "Zeh Fernandes",
   "build": {
     "asar": false,
-    "files": ["**/*", "!media${/*}"],
+    "files": [
+      "**/*",
+      "!media${/*}"
+    ],
     "appId": "com.zehfernandes.screenstokeynote",
     "mac": {
       "category": "public.app-category.productivity",
-      "target": ["dmg", "zip", "mas"],
-      "publish": ["github"]
+      "target": [
+        "dmg",
+        "zip",
+        "mas"
+      ],
+      "publish": [
+        "github"
+      ]
     },
     "dmg": {
       "iconSize": 160,
@@ -48,7 +60,7 @@
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-1": "^6.22.0",
-    "electron": "^1.4.1",
+    "electron": "^1.7.11",
     "electron-builder": "^19.54.0",
     "electron-packager": "^8.7.2",
     "eslint": "^3.7.1",
