@@ -1,7 +1,7 @@
 {
   "defaults": [
     {
-      "name": "mobile",
+      "name": "iphone 8",
       "category": "default",
       "images": [{ "x": 780, "y": 208, "width": 360, "height": 640 }],
       "mockup": {
@@ -10,6 +10,30 @@
         "width": 1920,
         "height": 1080,
         "path": "mockups/mockup-mobile.png"
+      }
+    },
+    {
+      "name": "iphone XR",
+      "category": "default",
+      "images": [{ "x": 762, "y": 107, "width": 398, "height": 860 }],
+      "mockup": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080,
+        "path": "mockups/mockup-mobile-iphone-xr.png"
+      }
+    },
+    {
+      "name": "Galaxy S7",
+      "category": "default",
+      "images": [{ "x": 753, "y": 169, "width": 416, "height": 741 }],
+      "mockup": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080,
+        "path": "mockups/mockup-mobile-galaxy-s7.png"
       }
     },
     {
@@ -22,6 +46,18 @@
         "width": 1920,
         "height": 1080,
         "path": "mockups/mockup-desktop.png"
+      }
+    },
+    {
+      "name": "Browser 15”",
+      "category": "default",
+      "images": [{ "x": 240, "y": 155, "width": 1440, "height": 800 }],
+      "mockup": {
+        "x": 0,
+        "y": 0,
+        "width": 1920,
+        "height": 1080,
+        "path": "mockups/mockup-browser-1440x800.png"
       }
     },
     {
